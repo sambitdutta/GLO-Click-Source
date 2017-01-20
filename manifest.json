@@ -1,14 +1,14 @@
 {
     "manifest_version": 2,
-    "name": "GLO Recruitment",
-    "short_name": "GLO Recruitment",
+    "name": "GLO Recruitment - Click2Add",
+    "short_name": "Click2Add",
     "description": "Any attachments are sent to Rchilli for parsing and then saved",
     "version": "1.0",
     "default_locale": "en",
     "icons": {
-        "16": "img/logo16.png",
-        "48": "img/logo48.png",
-        "128": "img/logo128.png"
+        "16": "images/logo16.png",
+        "48": "images/logo48.png",
+        "128": "images/logo128.png"
     },
     "permissions": [
         "identity",
@@ -19,7 +19,7 @@
         "storage"
     ],
     "background": {
-        "scripts": ["jquery-1.10.2.min.js", "rchilli.js", "background.js", "client.js"]
+        "scripts": ["javascripts/jquery-1.10.2.min.js", "javascripts/rchilli.js", "javascripts/background.js"]
     },
     "content_security_policy": "script-src 'self' https://*.google.com 'unsafe-eval'; object-src 'self'",
     "oauth2": {
@@ -31,22 +31,15 @@
     "content_scripts": [
         {
             "matches": ["https://mail.google.com/*", "https://inbox.google.com/*"],
-            "css": ["styles.css"],
-            "js": ["google-analytics-bundle.js", "inboxsdk.js", "util.js", "app.js"]
+            "css": ["stylesheets/styles.css"],
+            "js": ["javascripts/google-analytics-bundle.js", "javascripts/inboxsdk.js", "javascripts/util.js", "javascripts/app.js"]
         }
     ],
     "web_accessible_resources": [
-        "img/save.png",
-        "img/parse.png",
-        "images/ui-icons_444444_256x240.png",
-        "images/ui-icons_ffffff_256x240.png",
-        "images/ui-icons_555555_256x240.png",
-        "images/ui-icons_777620_256x240.png",
-        "images/ui-icons_777777_256x240.png",
-        "images/ui-icons_cc0000_256x240.png"
+        "images/save.png",
+        "images/parse.png"
     ],
     "browser_action": {
-        
         "default_popup": "popup.html"
     }
 }

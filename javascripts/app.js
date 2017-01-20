@@ -34,7 +34,7 @@ Promise.all([
             var addCustomAttachmentsToolbarButton = function (messageView) {
                 var options = {
                     tooltip: chrome.i18n.getMessage('tooltip'),
-                    iconUrl: chrome.runtime.getURL('img/parse.png'),
+                    iconUrl: chrome.runtime.getURL('images/parse.png'),
                     onClick: handleAttachmentsButtonClick
                 };
 
