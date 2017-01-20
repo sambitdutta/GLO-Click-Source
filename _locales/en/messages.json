@@ -1,0 +1,10 @@
+{
+  "description":{
+    "message":"This extension permits you to parse all resumes attached and create candidates, in a mail, separately on Gmail™",
+    "description":"Description displayed in manifest"
+  },
+  "tooltip":{
+    "message":"Create Candidate(s)",
+    "description":"Message displayed when you focus the icon to download"
+  }
+}

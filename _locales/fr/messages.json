@@ -1,0 +1,13 @@
+{
+  "description":{
+    "message":"Cette extension vous permet d'analyser tous les CV joints et de créer des candidats, par courrier, séparément sur Gmail ™",
+    "description":"Description affiché dans le manifest"
+  },
+  "tooltip":{
+    "message":"Créer le (s) candidat (s)",
+    "description":"Message qui s'affiche quand on passe le curseur sur l'icône pour télécharger toutes les pièces jointes séparément"
+  }
+}
+
+
+
