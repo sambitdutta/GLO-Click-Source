@@ -1,10 +1,10 @@
-Better download all for Gmail™
+GLO Recruitment - Click2Add™
 ==============================
 
 Purpose
 -------
 
-This is a google chrome extension. It permits you to download all files attached in a mail without downloading the archive created automatically by Gmail. My save button download each files separately.
+This is a google chrome extension. It permits you to add candidates by sending any attachments to Rchilli.
 
 How to install?
 ---------------
@@ -21,8 +21,6 @@ Just click on the icon ![Better download all icon](http://puu.sh/klB1I/14428d9a4
 About
 -----
 
-Developed by [medric](https://github.com/medric) && [mlazzje](https://github.com/mlazzje)
-
-Original idea of [Stéphane](https://github.com/St3ph-fr)
+Developed by [sambit](https://github.com/sambitdutta)
 
 
