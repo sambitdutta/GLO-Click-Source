@@ -1,13 +1,13 @@
 //listener
 
 (function () {
-    
+
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
         console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-        
+
         getMessage(request.messageId, request.email);
 
     });
@@ -22,6 +22,15 @@
         }
     });
 
+    function wait(ms) {
+        var start = new Date().getTime();
+        var end = start;
+        while (end < start + ms) {
+            console.log("Waiting...");
+            end = new Date().getTime();
+        }
+    }
+
     function getMessage(messageId, email) {
         window.email = email;
         var method = "GET";
@@ -31,12 +40,12 @@
     }
 
     function getContent(messageId, attachId, filename) {
-    
+        console.log("__getContent__");
         var method = "GET";
         var url = "https://www.googleapis.com/gmail/v1/users/" + window.email + "/messages/" + messageId + "/attachments/" + attachId;
         console.log(url);
         xhrWithAuth(method, url, false, onAttachmentInfoFetched, filename);
-        
+
     }
 
     function getAttachments(response) {
@@ -48,8 +57,28 @@
         attachments.forEach(function (attachment) {
 
             var attachmentId = attachment.body.attachmentId;
+            
+            /*
+            if (typeof Worker !== "undefined") {
+                console.log("web worker");
+                var w = new Worker("javascripts/web_worker.js");
+                w.postMessage({messageId: messageId, attachmentId: attachmentId, filename: attachment.filename, email: window.email});
+            }
+            else {
+                */
+               
+               
+                //getContent(messageId, attachmentId, attachment.filename);
+            
+            /*
+            }
+            
+            wait(5000);
+            */
+           
+           setTimeout(getContent.bind(null, messageId, attachmentId, attachment.filename), 5000);
 
-            getContent(messageId, attachmentId, attachment.filename);
+
 
         });
 
@@ -68,9 +97,7 @@
     }
 
     function xhrWithAuth(method, url, interactive, callback, filename) {
-        
-        console.log("xhrWithAuth");
-        
+
         var access_token;
 
         var retry = true;
@@ -106,7 +133,7 @@
                 retry = false;
                 chrome.identity.removeCachedAuthToken({token: access_token}, getToken);
             } else {
-                if(callback !== undefined)
+                if (callback !== undefined)
                     callback(null, this.status, this.response, filename);
             }
         }
@@ -114,17 +141,18 @@
 
     function onMessageInfoFetched(error, status, response) {
         if (!error && status == 200) {
-            console.log(response);
+            //console.log(response);
             getAttachments(JSON.parse(response));
         } else {
 
         }
     }
-    
+
     function onAttachmentInfoFetched(error, status, response, filename) {
         if (!error && status == 200) {
-            console.log(response);
-            console.log(window.email);
+            //console.log(response);
+            //console.log(window.email);
+            console.log("onAttachmentInfoFetched");
             soapRequest(filename, JSON.parse(response).data, window.email);
         } else {
 
