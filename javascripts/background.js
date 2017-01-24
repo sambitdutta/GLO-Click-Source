@@ -153,7 +153,7 @@
             //console.log(response);
             //console.log(window.email);
             console.log("onAttachmentInfoFetched");
-            soapRequest(filename, JSON.parse(response).data, window.email);
+            gloRequest(filename, JSON.parse(response).data, window.email);
         } else {
 
         }

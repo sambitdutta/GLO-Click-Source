@@ -1,4 +1,4 @@
-function soapRequest(filename, content, email) {
+function gloRequest(filename, content, email) {
 
     var data = JSON.stringify({content: content, filename: filename, email: email});
 
@@ -60,7 +60,7 @@ function soapRequest(filename, content, email) {
         return xhr;
     }
 
-    var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/gloapis/email/candidates/parse");
+    var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/gloapis/chrome/candidates/parse");
 
     if (!xhr) {
         console.log("XHR issue");
@@ -72,7 +72,9 @@ function soapRequest(filename, content, email) {
         console.log(results);
         results = JSON.parse(results);
         
-        var wait = Math.floor(Math.random() * 10) + 1;
+        var options = [3, 6, 9, 12, 15, 18, 21];
+        var wait = options[Math.floor(Math.random()*options.length)];
+        //var wait = Math.floor(Math.random() * 10) + 1;
 
         if (Number(xhr.status) !== 200) {
 
