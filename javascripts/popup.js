@@ -28,7 +28,7 @@ var resumeParser = {
             //console.log(obj);
             obj.success.forEach(function (e) {
                 var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
-                $("#success").append('<div class="row"><div class="col-sm-6">'+e.filename+'</div><div class="col-sm-6">'+date+'</div></div>');
+                $("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
             });
         });
 
@@ -40,7 +40,7 @@ var resumeParser = {
             //console.log(obj);
             obj.error.forEach(function (e) {
                 var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
-                $("#error").append('<div class="row"><div class="col-sm-6">'+e.filename+'</div><div class="col-sm-6">'+date+'</div></div>');
+                $("#error").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
             });
         });
 

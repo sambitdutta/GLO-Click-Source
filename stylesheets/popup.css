@@ -22,3 +22,7 @@ table {
     padding: 0;
     overflow: auto;
 }
+.ir-logo{
+    vertical-align: middle;
+    margin-right: 15px;
+}
