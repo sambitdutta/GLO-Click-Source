@@ -22,38 +22,40 @@ var resumeParser = {
      },
      */
     renderSuccess: function () {
-        $("#success ul").html("");
-
         chrome.storage.sync.get('success', function (obj) {
             //console.log(obj);
+            var content = "";
             obj.success.forEach(function (e) {
                 var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
-                $("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                content += '<div class="row"><div class="col-xs-6">' + e.filename + '</div><div class="col-xs-6">' + date + '</div></div>';
             });
+            $("#success").html(content);
         });
 
     },
     renderError: function () {
-        $("#error ul").html("");
-
         chrome.storage.sync.get('error', function (obj) {
             //console.log(obj);
+            var content = "";
             obj.error.forEach(function (e) {
                 var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
-                $("#error").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                //$("#error").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                content += '<div class="row"><div class="col-xs-6">' + e.filename + '</div><div class="col-xs-6">' + date + '</div></div>';
             });
+            $("#error").html(content);
         });
 
     }
 }
 
 $(function () {
-/*
-    $("#accordion").accordion({
-        collapsible: true
-    });
-    
-    */
+    /*
+     $("#accordion").accordion({
+     collapsible: true
+     });
+     
+     */
 
     resumeParser.renderSuccess();
     resumeParser.renderError();
