@@ -49,6 +49,13 @@ table {
     font-family: roboto;
 }
 
+.loginmodal-container p#errorMessage {
+    text-align: center;
+    //font-size: 1.8em;
+    font-family: roboto;
+    color: red;
+}
+
 .loginmodal-container input[type=submit] {
     width: 100%;
     display: block;

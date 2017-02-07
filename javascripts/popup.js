@@ -32,6 +32,11 @@ var resumeParser = {
 }
 
 function formBinding() {
+    
+    $(document).on('keyup', "input:text", function(){
+        $("p#errorMessage").hide();
+    });
+    
     $(document).on('click', "#sign_in", function () {
 
         console.log("yessssssss");
@@ -149,7 +154,7 @@ function formBinding() {
                 return xhr;
             }
 
-            var xhr = createCORSRequest("POST", "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/gloapis/login");
+            var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/gloapis/login");
 
             xhr.onload = function () {
                 var results = xhr.responseText;
@@ -168,7 +173,8 @@ function formBinding() {
                     loadWidgets();
                 }
                 else {
-
+                    console.log("Auth failed");
+                    $("p#errorMessage").show();
                 }
 
 
@@ -190,7 +196,7 @@ function loadWidgets() {
     $("#content").load("widgets.html div#accordion", function () {
         resumeParser.renderSuccess();
         resumeParser.renderError();
-    })
+    });
 }
 
 
@@ -208,9 +214,7 @@ $(function () {
         else {
             loadWidgets();
         }
-    })
-
-
+    });
 
 });
 

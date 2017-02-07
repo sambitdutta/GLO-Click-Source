@@ -22,7 +22,7 @@ function gloRequest(filename, content, email, token) {
         return xhr;
     }
 
-    var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z" + token + "/gloapis/chrome/candidates/parse");
+    var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/" + token + "/gloapis/chrome/candidates/parse");
 
     if (!xhr) {
         console.log("XHR issue");
@@ -33,24 +33,23 @@ function gloRequest(filename, content, email, token) {
         var results = xhr.responseText;
         console.log(results);
         results = JSON.parse(results);
-        
+
         var options = [3, 6, 9, 12, 15, 18, 21];
-        var wait = options[Math.floor(Math.random()*options.length)];
+        var wait = options[Math.floor(Math.random() * options.length)];
         //var wait = Math.floor(Math.random() * 10) + 1;
 
         if (Number(xhr.status) !== 200) {
 
             setTimeout(
                     errorMessage.bind(null, filename),
-                    wait*1000);
+                    wait * 1000);
 
         }
         else {
 
             setTimeout(
                     successMessage.bind(null, filename),
-                    wait*1000);
-
+                    wait * 1000);
 
         }
     }
@@ -114,6 +113,22 @@ function gloRequest(filename, content, email, token) {
         });
     }
 
+}
+
+function clearData() {
+    chrome.storage.sync.get('error', function (obj) {
+        obj.error = [];
+        chrome.storage.sync.set(obj, function () {
+
+        });
+    });
+
+    chrome.storage.sync.get('success', function (obj) {
+        obj.success = [];
+        chrome.storage.sync.set(obj, function () {
+
+        });
+    });
 }
 
 
