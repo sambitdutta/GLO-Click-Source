@@ -3,7 +3,7 @@
     "name": "GLO Recruitment - Click2Add",
     "short_name": "Click2Add",
     "description": "Any attachments are sent to Rchilli for parsing and then saved",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "default_locale": "en",
     "icons": {
         "16": "images/logo16.png",
@@ -23,7 +23,7 @@
     },
     "content_security_policy": "script-src 'self' https://*.google.com 'unsafe-eval'; object-src 'self'",
     "oauth2": {
-        "client_id": "86466949238-67evl30ng9u545dt392sf8g0bd6k0pup.apps.googleusercontent.com",
+        "client_id": "86466949238-ndm677g5ib5p189p0t65d94pqc0073u8.apps.googleusercontent.com",
         "scopes": [
             "https://www.googleapis.com/auth/gmail.modify"
         ]
