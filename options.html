@@ -18,21 +18,31 @@
                             </td>
                             <td>                                
                                 <h3>GLO Recruitment - Click2Add</h3>
-                                <p>Lists the statuses of every attachment parsed.</p>
                             </td>
                         </tr>
                     </table>                 
                 </div>
-            </div>
-            <div id="content">
+            </div>            
+            <p>The form below contains three radio buttons. The last option is disabled:</p>
+            <form>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Option 1</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="optradio">Option 2</label>
+                </div>
+                <div class="radio disabled">
+                    <label><input type="radio" name="optradio" disabled>Option 3</label>
+                </div>
                 
-            </div>
+                <button type="button" class="btn btn-default">Save</button>
+            </form>
         </div>
 
         <script src="javascripts/jquery-1.10.2.min.js"></script>
         <script src="javascripts/bootstrap.min.js"></script>
         <script src="javascripts/moment.js"></script>
-        <script src="javascripts/popup.js"></script>    
+        <script src="javascripts/options.js"></script>    
 
     </body>
 </html>

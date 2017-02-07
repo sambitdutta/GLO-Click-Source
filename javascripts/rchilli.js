@@ -1,44 +1,6 @@
-function gloRequest(filename, content, email) {
+function gloRequest(filename, content, email, token) {
 
     var data = JSON.stringify({content: content, filename: filename, email: email});
-
-    /*
-     
-     chrome.storage.sync.get('error', function (obj) {
-     
-     var fileObj = {filename: filename, timestamp: (new Date()).toString()};
-     
-     if (Object.keys(obj).length === 0 && obj.constructor === Object) {
-     console.log("fresh");
-     obj.error = [fileObj];
-     }
-     else {
-     obj.error.push(fileObj);
-     }
-     
-     chrome.storage.sync.set(obj, function () {
-     // Notify that we saved.
-     console.log('Error saved');
-     
-     });
-     
-     });
-     
-     return;
-     
-     */
-
-    function doInCurrentTab(tabCallback) {
-        debugger;
-        chrome.tabs.query(
-                {currentWindow: true, active: true},
-        function (tabs) {
-            tabCallback(tabs[0]);
-        }
-        );
-    }
-
-
 
     function createCORSRequest(method, url) {
         var xhr = new XMLHttpRequest();
@@ -60,7 +22,7 @@ function gloRequest(filename, content, email) {
         return xhr;
     }
 
-    var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/gloapis/chrome/candidates/parse");
+    var xhr = createCORSRequest("POST", "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z" + token + "/gloapis/chrome/candidates/parse");
 
     if (!xhr) {
         console.log("XHR issue");
