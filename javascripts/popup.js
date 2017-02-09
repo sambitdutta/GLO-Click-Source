@@ -116,7 +116,7 @@ var Base64 = {_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
         return t
     }}
 
-function formBinding() {
+function formBinding(host_and_key) {
 
     $(document).on('click', "a#logout", function () {
         chrome.storage.sync.get('token', function (obj) {
@@ -143,7 +143,7 @@ function formBinding() {
                     return xhr;
                 }
 
-                var xhr = createCORSRequest("GET", "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/" + obj.token + "/gloapis/logout");
+                var xhr = createCORSRequest("GET", host_and_key + obj.token + "/gloapis/logout");
 
                 xhr.onload = function () {
                     var results = xhr.responseText;
@@ -223,7 +223,7 @@ function formBinding() {
                 return xhr;
             }
 
-            var xhr = createCORSRequest("POST", "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/gloapis/login");
+            var xhr = createCORSRequest("POST", host_and_key + "gloapis/login");
 
             xhr.onload = function () {
                 var results = xhr.responseText;
@@ -288,8 +288,17 @@ function loadLoginPage() {
 
 
 $(function () {
-
-    formBinding();
+    
+    chrome.management.getSelf(function(r){ 
+        var url;
+        if(r.installType === "development"){
+            url = "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
+        }else if(r.installType === "normal"){
+            url = "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
+        }
+        
+        formBinding(url);
+    });
 
     chrome.storage.sync.get('token', function (obj) {
         if (!obj.token) {
