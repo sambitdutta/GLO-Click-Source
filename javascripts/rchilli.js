@@ -34,9 +34,11 @@ function gloRequest(filename, content, email, token) {
         console.log(results);
         results = JSON.parse(results);
 
-        var options = [3, 6, 9, 12, 15, 18, 21];
-        var wait = options[Math.floor(Math.random() * options.length)];
+        //var options = [3, 6, 9, 12, 15, 18, 21];
+        //var wait = options[Math.floor(Math.random() * options.length)];
         //var wait = Math.floor(Math.random() * 10) + 1;
+        
+        var wait = parseInt(Math.random()*10);
 
         if (Number(xhr.status) !== 200) {
 

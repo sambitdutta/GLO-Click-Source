@@ -49,6 +49,10 @@ table {
     font-family: roboto;
 }
 
+p.thick {
+    font-weight: bold;
+}
+
 .loginmodal-container p#errorMessage {
     text-align: center;
     //font-size: 1.8em;
