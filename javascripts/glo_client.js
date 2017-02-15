@@ -1,12 +1,14 @@
+window.busy = false;
+
 function gloRequest(filename, content, email, token) {
 
     var data = JSON.stringify({content: content, filename: filename, email: email});
 
     chrome.management.getSelf(function (r) {
         var url;
-        
-        console.log(r);
-        
+
+        //console.log(r);
+
         if (r.installType === "development") {
             url = "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
         } else if (r.installType === "normal") {
@@ -49,25 +51,7 @@ function gloRequest(filename, content, email, token) {
             console.log(results);
             results = JSON.parse(results);
 
-            var options = [3, 6, 9, 12, 15, 18, 21];
-            var wait1 = options[Math.floor(Math.random() * options.length)];
-            
-            var wait2 = parseInt(Math.random()*10);
-
-            if (Number(xhr.status) !== 200) {
-
-                setTimeout(
-                        errorMessage.bind(null, filename),
-                        wait1 * wait2 * 1000);
-
-            }
-            else {
-
-                setTimeout(
-                        successMessage.bind(null, filename),
-                        wait1 * wait2 * 1000);
-
-            }
+            handleResponse(xhr, filename, results);
         }
 
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -75,7 +59,46 @@ function gloRequest(filename, content, email, token) {
 
         xhr.send(data);
 
+        function handleResponse(xhr, filename, results) {
+            //var options = [3, 6, 9, 12, 15, 18, 21];
+            //var wait1 = options[Math.floor(Math.random() * options.length)];
+
+            //var wait2 = parseInt(Math.random() * 10);
+            
+            console.log(xhr.status);
+
+            if (Number(xhr.status) !== 200) {
+
+                if (window.busy === true) {
+                    console.log("LOCKED - setting timeout");
+                    setTimeout(
+                            handleResponse.bind(null, xhr, filename, results),
+                            2000);
+                }
+                else {
+                    errorMessage(filename);
+                }
+
+
+            }
+            else {
+
+                if (window.busy === true) {
+                    console.log("LOCKED - setting timeout");
+                    setTimeout(
+                            handleResponse.bind(null, xhr, filename, results),
+                            2000);
+                }
+                else {
+                    successMessage(filename);
+                }
+
+            }
+        }
+
         function errorMessage(filename) {
+            window.busy = true;
+
             chrome.browserAction.getBadgeText({}, function (r) {
                 chrome.browserAction.setBadgeText({text: String(Number(r) + 1)});
             });
@@ -98,6 +121,7 @@ function gloRequest(filename, content, email, token) {
                 chrome.storage.sync.set(obj, function () {
                     // Notify that we saved.
                     console.log('Error saved');
+                    window.busy = false;
 
                 });
 
@@ -105,9 +129,10 @@ function gloRequest(filename, content, email, token) {
         }
 
         function successMessage(filename) {
+            window.busy = true;
+
             chrome.storage.sync.get('success', function (obj) {
                 // Notify that we saved.
-                console.log(obj.success);
 
                 var fileObj = {filename: filename, timestamp: (new Date()).toString()};
 
@@ -123,6 +148,7 @@ function gloRequest(filename, content, email, token) {
                 chrome.storage.sync.set(obj, function () {
                     // Notify that we saved.
                     console.log('Success saved');
+                    window.busy = false;
 
                 });
 

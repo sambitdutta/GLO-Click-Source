@@ -28,7 +28,39 @@ var resumeParser = {
             $("#error").html(content);
         });
 
+    },
+    
+    renderAll: function() {
+        chrome.storage.sync.get(['success', 'error', 'progress'], function (obj) {
+            //console.log(obj);
+            var content = "";
+            
+            if(obj.progress !== undefined)
+                obj.progress.forEach(function (e) {
+                    var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
+                    //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                    content += '<tr><td>' + e.filename + '</td><td>' + date + '</td><td>In Progress</td></tr>';
+                });
+            
+            if(obj.error !== undefined)
+                obj.error.forEach(function (e) {
+                    var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
+                    //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                    content += '<tr><td>' + e.filename + '</td><td>' + date + '</td><td>Error</td></tr>';
+                });
+            
+            if(obj.success !== undefined)
+                obj.success.forEach(function (e) {
+                    var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
+                    //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
+                    content += '<tr><td>' + e.filename + '</td><td>' + date + '</td><td>Success</td></tr>';
+                });
+            
+            $("#statusContent").html(content);
+            
+        });
     }
+    
 }
 
 var Base64 = {_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
@@ -265,10 +297,10 @@ function formBinding(host_and_key) {
 
 function loadWidgets() {
     console.log("Loading Widgets");
-    $("#content").load("widgets.html div#accordion", function () {
-        resumeParser.renderSuccess();
-        resumeParser.renderError();
-
+    $("#content").load("table.html div.container", function () {
+        //resumeParser.renderSuccess();
+        //resumeParser.renderError();
+        resumeParser.renderAll();    
         $("div.logout-container").removeClass("hidden");
     });
 }

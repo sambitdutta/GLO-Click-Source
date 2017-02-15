@@ -3,7 +3,7 @@
     "name": "GLO Click&Source",
     "short_name": "Click&Source",
     "description": "Any attachments are sent to Rchilli for parsing and then saved",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "default_locale": "en",
     "icons": {
         "16": "images/logo16.png",
@@ -19,11 +19,11 @@
         "storage"
     ],
     "background": {
-        "scripts": ["javascripts/jquery-1.10.2.min.js", "javascripts/rchilli.js", "javascripts/background.js"]
+        "scripts": ["javascripts/jquery-1.10.2.min.js", "javascripts/glo_client.js", "javascripts/background.js"]
     },
     "content_security_policy": "script-src 'self' https://*.google.com 'unsafe-eval'; object-src 'self'",
     "oauth2": {
-        "client_id": "86466949238-ndm677g5ib5p189p0t65d94pqc0073u8.apps.googleusercontent.com",
+        "client_id": "86466949238-67evl30ng9u545dt392sf8g0bd6k0pup.apps.googleusercontent.com",
         "scopes": [
             "https://www.googleapis.com/auth/gmail.modify"
         ]
