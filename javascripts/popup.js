@@ -58,6 +58,9 @@ var resumeParser = {
             
             $("#statusContent").html(content);
             
+            if($("#statusContent").html().length === 0)
+                $("#statusContent").html("<tr><td colspan='3'>No data found</td></tr>");
+            
         });
     }
     
