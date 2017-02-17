@@ -36,8 +36,6 @@ function gloRequest(filename, content, email, token) {
                 chrome.management.getSelf(function (r) {
                     var url;
 
-                    //console.log(r);
-
                     if (r.installType === "development") {
                         url = "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
                     } else if (r.installType === "normal") {
@@ -96,6 +94,10 @@ function gloRequest(filename, content, email, token) {
                         //var wait2 = parseInt(Math.random() * 10);
 
                         console.log(xhr.status);
+                        
+                        if (Number(xhr.status) === 401)
+                            clearToken();
+                            
 
                         if (Number(xhr.status) !== 200) {
 
@@ -259,5 +261,14 @@ function clearData() {
         chrome.storage.sync.set(obj, function () {
 
         });
+    });
+}
+
+
+function clearToken() {
+    chrome.storage.sync.set({token: ""}, function () {
+        // Notify that we saved.
+        console.log('Token cleared');
+
     });
 }

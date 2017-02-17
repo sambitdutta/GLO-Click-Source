@@ -300,7 +300,7 @@ function formBinding(host_and_key) {
 
 function loadWidgets() {
     console.log("Loading Widgets");
-    $("#content").load("table.html div.container", function () {
+    $("#content").load("table.html div.files-table", function () {
         //resumeParser.renderSuccess();
         //resumeParser.renderError();
         resumeParser.renderAll();    
@@ -341,7 +341,6 @@ $(function () {
         }
         else {
             loadWidgets();
-            //loadSuccessPage();
         }
     });
 
