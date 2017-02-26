@@ -29,41 +29,40 @@ var resumeParser = {
         });
 
     },
-    
-    renderAll: function() {
+    renderAll: function () {
         chrome.storage.sync.get(['success', 'error', 'progress'], function (obj) {
             //console.log(obj);
             var content = "";
-            
-            if(obj.progress !== undefined)
+
+            if (obj.progress !== undefined)
                 obj.progress.forEach(function (e) {
                     var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
                     //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
                     content += '<tr><td>' + e.filename + '</td><td>' + date + '</td><td>In Progress</td></tr>';
                 });
-            
-            if(obj.error !== undefined)
+
+            if (obj.error !== undefined)
                 obj.error.forEach(function (e) {
                     var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
                     //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
                     content += '<tr><td>' + e.filename + '</td><td>' + date + '</td><td>Error</td></tr>';
                 });
-            
-            if(obj.success !== undefined)
+
+            if (obj.success !== undefined)
                 obj.success.forEach(function (e) {
                     var date = moment(new Date(e.timestamp)).format('MMMM Do YYYY, h:mm:ss a');
                     //$("#success").append('<div class="row"><div class="col-xs-6">'+e.filename+'</div><div class="col-xs-6">'+date+'</div></div>');
                     content += '<tr><td>' + e.filename + '</td><td>' + date + '</td><td>Success</td></tr>';
                 });
-            
+
             $("#statusContent").html(content);
-            
-            if($("#statusContent").html().length === 0)
+
+            if ($("#statusContent").html().length === 0)
                 $("#statusContent").html("<tr><td colspan='3'>No data found</td></tr>");
-            
+
         });
     }
-    
+
 }
 
 var Base64 = {_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) {
@@ -290,14 +289,14 @@ function formBinding(host_and_key) {
 
             xhr.setRequestHeader('Authorization', Base64.encode(login + ":" + password));
             xhr.setRequestHeader('Accept', 'application/json');
-            
+
             var data = JSON.stringify({clicknsource: "true"});
-            
+
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(data);
 
         }
-        
+
     });
 }
 
@@ -306,7 +305,7 @@ function loadWidgets() {
     $("#content").load("table.html div.files-table", function () {
         //resumeParser.renderSuccess();
         //resumeParser.renderError();
-        resumeParser.renderAll();    
+        resumeParser.renderAll();
         $("div.logout-container").removeClass("hidden");
     });
 }
@@ -326,15 +325,15 @@ function loadLoginPage() {
 
 
 $(function () {
-    
-    chrome.management.getSelf(function(r){ 
+
+    chrome.management.getSelf(function (r) {
         var url;
-        if(r.installType === "development"){
+        if (r.installType === "development") {
             url = "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
-        }else if(r.installType === "normal"){
+        } else if (r.installType === "normal") {
             url = "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
         }
-        
+
         formBinding(url);
     });
 
@@ -377,3 +376,17 @@ function clearToken() {
 
     });
 }
+
+$(function () {
+    $("a.new-window").click(function () {
+        var w = 500;
+        var h = 500;
+        chrome.windows.create({'url': 'popup.html', 'type': 'popup', 'width': w, 'height': h}, function (window) {
+        });
+    });
+
+    chrome.windows.getCurrent(function (c) {
+        if (c.type === "popup")
+            $("a.new-window").hide();
+    });
+});
