@@ -2,8 +2,8 @@
     "manifest_version": 2,
     "name": "GLO Click&Source",
     "short_name": "Click&Source",
-    "description": "Any attachments are sent to Rchilli for parsing and then saved",
-    "version": "1.0.8",
+    "description": "Allows you to parse resumes (though RChilli) present in the form of attachments in gmail and create candidates in our ATS through a click of a button",
+    "version": "1.0.0",
     "default_locale": "en",
     "icons": {
         "16": "images/logo16.png",

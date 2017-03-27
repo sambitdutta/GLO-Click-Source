@@ -357,7 +357,7 @@ $(function () {
         if (r.installType === "development") {
             url = "http://localhost:3000/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
         } else if (r.installType === "normal") {
-            url = "https://glo-new-staging.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
+            url = "https://gloapis.globallogic.com/a40d6b8cbea3754bab60a51a6e72b35329df399z/";
         }
 
         formBinding(url);
