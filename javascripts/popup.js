@@ -61,6 +61,31 @@ var resumeParser = {
                 $("#statusContent").html("<tr><td colspan='3'>No data found</td></tr>");
 
         });
+    },
+    
+    clearData: function () {
+
+        chrome.storage.sync.get('error', function (obj) {
+            obj.error = [];
+            chrome.storage.sync.set(obj, function () {
+                resumeParser.renderAll();
+            });
+        });
+
+        chrome.storage.sync.get('success', function (obj) {
+            obj.success = [];
+            chrome.storage.sync.set(obj, function () {
+                resumeParser.renderAll();
+            });
+        });
+
+        chrome.storage.sync.get('progress', function (obj) {
+            obj.progress = [];
+            chrome.storage.sync.set(obj, function () {
+                resumeParser.renderAll();
+            });
+        });
+
     }
 
 }
@@ -307,6 +332,7 @@ function loadWidgets() {
         //resumeParser.renderError();
         resumeParser.renderAll();
         $("div.logout-container").removeClass("hidden");
+        $("a#clearData").removeClass("hidden");
     });
 }
 
@@ -388,5 +414,9 @@ $(function () {
     chrome.windows.getCurrent(function (c) {
         if (c.type === "popup")
             $("a.new-window").hide();
+    });
+    
+    $(document).on("click", "#clearData", function(){
+        resumeParser.clearData();
     });
 });
