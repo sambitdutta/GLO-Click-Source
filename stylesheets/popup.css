@@ -134,3 +134,7 @@ p.thick {
 .logout-container {
     padding-top: 20px;
 }
+
+input[type=text].invalid, input[type=password].invalid {
+    border-color: #ee5f5b;
+}

@@ -254,9 +254,10 @@ function formBinding(host_and_key) {
 
         var $button = $(this);
 
-        $button.button("loading");
-
-        if ($("input[name='login']").val() && $("input[name='password']").val()) {
+        if ($("input[name='login']").val()!="" && $("input[name='password']").val()!="") {
+            
+            $button.button("loading");
+            
             var login = $("input[name='login']").val();
             var password = $("input[name='password']").val();
 
@@ -321,6 +322,11 @@ function formBinding(host_and_key) {
             xhr.send(data);
 
         }
+        else{
+            
+            $(".loginmodal-container input:text, .loginmodal-container input:password").addClass("invalid");
+            
+        }
 
     });
 }
@@ -338,13 +344,14 @@ function loadWidgets() {
 
 function loadSuccessPage() {
     $("#content").load("success.html div#loginSuccess", function () {
-
+        $("a#clearData").addClass("hidden");
     });
 }
 
 function loadLoginPage() {
     $("#content").load("login.html div", function () {
         $("div.logout-container").addClass("hidden");
+        $("a#clearData").addClass("hidden");
     });
 }
 
@@ -419,4 +426,9 @@ $(function () {
     $(document).on("click", "#clearData", function(){
         resumeParser.clearData();
     });
+    
+    $(document).on("focus", ".loginmodal-container input:text, .loginmodal-container input:password", function(){
+        $(this).removeClass("invalid");
+    });
+    
 });
