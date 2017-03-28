@@ -324,8 +324,8 @@ function formBinding(host_and_key) {
         }
         else{
             
-            $(".loginmodal-container input:text, .loginmodal-container input:password").addClass("invalid");
-            
+            $(".loginmodal-container input:text, .loginmodal-container input:password").filter(function() { return $(this).val() == ""; }).addClass("invalid");
+                    
         }
 
     });
